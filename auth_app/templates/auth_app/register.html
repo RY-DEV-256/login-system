@@ -1,0 +1,48 @@
+{% extends 'auth_app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container p-3 mt-5">
+  <div class="row">
+    <div class="col-md-5 border p-5 mx-auto rounded shadow-lg">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group my-2">
+          {{ form.username|as_crispy_field }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.email|as_crispy_field }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.first_name|as_crispy_field }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.last_name|as_crispy_field }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.password|as_crispy_field }}
+        </div>
+        <div class="form-group my-2">
+          {{ form.confirm_password|as_crispy_field }}
+        </div>
+        <div class="my-3">
+          <button type="submit" class="btn btn-primary form-control">Register</button>
+        </div>
+        <div class="my-3">
+          <p class="d-flex">Already have an account? <span class="mx-2"><a href="{% url 'login' %}" class="nav-link text-primary">Login</a></span></p>
+          <div class="my-2"><a href="{% url 'index' %}" class="nav-link text-muted">Go Back to Home Page</a></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

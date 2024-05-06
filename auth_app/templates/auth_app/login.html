@@ -1,0 +1,31 @@
+{% extends 'auth_app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container p-3 mt-5">
+  <div class="row">
+    <div class="col-md-5 border p-5 mx-auto rounded shadow-lg">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="my-3">
+          <button type="submit" class="btn btn-primary form-control">Login</button>
+        </div>
+        <div class="my-3">
+          <p class="d-md-flex">Don't have an account? <span class="mx-2"><a href="{% url 'register' %}" class="nav-link text-primary">Register Now</a></span></p>
+          <div class="my-1"><a href="{% url 'index' %}" class="nav-link text-muted">Go Back to Home Page</a></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
